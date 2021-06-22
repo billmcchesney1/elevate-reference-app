@@ -35,7 +35,10 @@ class ElevateAcceleratorControllerCIT {
 	
 	@MockBean
 	private ElevateApi elevateApi;
-	
+
+	@MockBean
+	private ApiClient apiClient;
+
 	@Test
 	@DisplayName("Test Eligibility Service Success Scenario")
 	void testEligiblityService() throws Exception {
