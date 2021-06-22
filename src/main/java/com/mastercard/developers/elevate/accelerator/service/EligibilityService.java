@@ -50,7 +50,7 @@ public class EligibilityService {
             return eligibility;
 
         } catch (ApiException e) {
-            LOGGER.error("Caught Exception while calling Eligibility service : " + e.getMessage());
+            LOGGER.info("Exception caught while calling Eligibility Service  API.");
             throw new ServiceException(e.getMessage(), deserializeErrors(e.getResponseBody()));
         }
     }
