@@ -27,7 +27,7 @@
         <org.awaitility.version>3.1.6</org.awaitility.version>
         <apache.maven.plugins.version>3.0.0-M4</apache.maven.plugins.version>
         <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
-        <openapitools.version>4.3.1</openapitools.version>
+        <openapitools.version>5.1.0</openapitools.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
