@@ -1,5 +1,8 @@
 # Elevate Accelerator Reference App
 
+[![](https://sonarcloud.io/api/project_badges/measure?project=Mastercard_client-encryption-ruby&metric=alert_status)](https://sonarcloud.io/dashboard?id=Mastercard_client-encryption-ruby)
+[![](https://sonarcloud.io/api/project_badges/measure?project=Mastercard_client-encryption-ruby&metric=coverage)](https://sonarcloud.io/dashboard?id=Mastercard_client-encryption-ruby)
+[![](https://sonarcloud.io/api/project_badges/measure?project=Mastercard_client-encryption-ruby&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=Mastercard_client-encryption-ruby)
 
 ## Table of Contents
 - [Overview](#overview)
