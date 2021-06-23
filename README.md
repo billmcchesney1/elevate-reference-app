@@ -3,6 +3,7 @@
 [![](https://sonarcloud.io/api/project_badges/measure?project=Mastercard_elevate-reference-app&metric=alert_status)](https://sonarcloud.io/dashboard?id=Mastercard_elevate-reference-app)
 [![](https://sonarcloud.io/api/project_badges/measure?project=Mastercard_elevate-reference-app&metric=coverage)](https://sonarcloud.io/dashboard?id=Mastercard_elevate-reference-app)
 [![](https://sonarcloud.io/api/project_badges/measure?project=Mastercard_elevate-reference-app&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=Mastercard_elevate-reference-app)
+[![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Mastercard/elevate-reference-app/blob/master/LICENSE)
 
 ## Table of Contents
 - [Overview](#overview)
