@@ -16,11 +16,8 @@
 package com.mastercard.developers.elevate.accelerator.helper;
 
 import com.google.gson.Gson;
-import com.mastercard.developer.encryption.FieldLevelEncryptionConfig;
-import com.mastercard.developer.encryption.FieldLevelEncryptionConfigBuilder;
 import com.mastercard.developer.interceptors.OkHttpFieldLevelEncryptionInterceptor;
 import com.mastercard.developer.interceptors.OkHttpOAuth1Interceptor;
-import com.mastercard.developer.utils.EncryptionUtils;
 import com.mastercard.developers.elevate.accelerator.generated.invokers.ApiClient;
 import com.mastercard.developers.elevate.accelerator.generated.models.CheckEligibility;
 import com.mastercard.developers.elevate.accelerator.generated.models.Redemptions;
@@ -31,10 +28,10 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.security.PrivateKey;
-import java.security.cert.Certificate;
 import java.util.Objects;
 import java.util.Properties;
-import java.util.logging.Logger;
+
+import static com.mastercard.developers.elevate.accelerator.util.EncryptionConfigUtil.getEncryptionConfig;
 
 public final class RequestHelper {
 
@@ -43,25 +40,14 @@ public final class RequestHelper {
     private static final String KEYSTORE_PATH = "mastercard.elevate.client.p12.path";
     private static final String KEYSTORE_ALIAS = "mastercard.elevate.client.ref.app.keystore.alias";
     private static final String KEYSTORE_PASSWORD = "mastercard.elevate.client.ref.app.keystore.password";
-    private static final String ENCRYPTION_KEY = "mastercard.elevate.client.ref.app.encryption.file";
     private static final String TYPE_PK_CS12 = "PKCS12";
 
     private static final String CHECK_ELIGIBILITY_PAYLOAD = resourceContent("templates/" + "check-eligibility-payload.json");
 
     private static final String REDEMPTIONS_PAYLOAD = resourceContent("templates/" + "redemptions-payload.json");
 
-    private static final String JSON_PATH = "$";
-    private static final String SHA_256 = "SHA-256";
-    private static final String OAEP_HASHING_ALGORITHM = "oaepHashingAlgorithm";
-    private static final String ENCRYPTED_DATA = "encryptedData";
-    private static final String ENCRYPTED_KEY = "encryptedKey";
-    private static final String PUBLIC_KEY_FINGERPRINT = "publicKeyFingerprint";
-    private static final String IV = "iv";
-
     private static Properties prop = null;
     private static String propertyFile = "application.properties";
-
-    private static final Logger LOGGER = Logger.getLogger(RequestHelper.class.getName());
 
     private RequestHelper(){}
 
@@ -98,33 +84,11 @@ public final class RequestHelper {
         loadProperties();
         OkHttpClient client = new OkHttpClient().newBuilder().addInterceptor(
                 new OkHttpFieldLevelEncryptionInterceptor(
-                        getEncryptionConfig())).addInterceptor(
+                        getEncryptionConfig(prop))).addInterceptor(
                 new OkHttpOAuth1Interceptor(prop.getProperty(CONSUMER_KEY), getPrivateKey()))
                 .build();
 
         return new ApiClient().setHttpClient(client).setBasePath(prop.getProperty(BASE_URL));
-    }
-
-    private static FieldLevelEncryptionConfig getEncryptionConfig() {
-
-        FieldLevelEncryptionConfig config = null;
-        try {
-            Certificate encryptionCertificate = EncryptionUtils.loadEncryptionCertificate(prop.getProperty(ENCRYPTION_KEY));
-            config = FieldLevelEncryptionConfigBuilder.aFieldLevelEncryptionConfig()
-                    .withEncryptionCertificate(encryptionCertificate)
-                    .withEncryptionPath(JSON_PATH, JSON_PATH)
-                    .withOaepPaddingDigestAlgorithm(SHA_256)
-                    .withOaepPaddingDigestAlgorithmFieldName(OAEP_HASHING_ALGORITHM)
-                    .withEncryptedValueFieldName(ENCRYPTED_DATA)
-                    .withEncryptedKeyFieldName(ENCRYPTED_KEY)
-                    .withEncryptionKeyFingerprintFieldName(PUBLIC_KEY_FINGERPRINT)
-                    .withIvFieldName(IV)
-                    .withFieldValueEncoding(FieldLevelEncryptionConfig.FieldValueEncoding.HEX)
-                    .build();
-        } catch (Exception e) {
-            LOGGER.info("Error while getting encryption configuration" + e);
-        }
-        return config;
     }
 
     private static PrivateKey getPrivateKey() {

@@ -33,6 +33,7 @@
         </sonar.coverage.jacoco.xmlReportPaths>
         <sonar.coverage.exclusions>
             **/ElevateAcceleratorDemoApplication.java
+            **/util/EncryptionConfigUtil.java
         </sonar.coverage.exclusions>
         <sonar.projectKey>Mastercard_elevate-reference-app</sonar.projectKey>
         <sonar.organization>mastercard</sonar.organization>
@@ -222,6 +223,7 @@
                                     <excludes>
                                         <exclude>${default.package}.generated.*</exclude>
                                         <exclude>*ElevateAcceleratorDemoApplication</exclude>
+                                        <exclude>*EncryptionConfigUtil</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
