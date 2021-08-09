@@ -4,8 +4,6 @@ import com.mastercard.developers.elevate.accelerator.generated.invokers.ApiClien
 import com.mastercard.developers.elevate.accelerator.generated.models.CheckEligibility;
 import com.mastercard.developers.elevate.accelerator.generated.models.Redemptions;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
 import java.util.Properties;
@@ -15,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@RunWith(MockitoJUnitRunner.class)
 class RequestHelperTest {
 
     private static final String KEY_BASE_URL = "mastercard.elevate.client.api.base.path";
