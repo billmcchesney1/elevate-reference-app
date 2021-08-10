@@ -75,12 +75,12 @@ See also:
     - ```mastercard.elevate.client.ref.app.encryption.file ```- Path to encryption key (.pem) file, just change the name as per the downloaded file in step 5, e.g. ```src/main/resources/<fileName>.pem```.
 
 ## Use-Cases <a name="use-cases"></a>
-1. **Check Eligibility**
-endpoint "/eligibility"   
+1. **Check Eligibility**    
+Endpoint: "/eligibility".
 Used to check eligibility of a credit card in the elevate program for a specific benefit.
 
-2. **create Redemptions**    
-endpoint "/redemptions"
+2. **Create Redemptions**    
+Endpoint: "/redemptions".
 Used to create a redemption for a credit card that was previously enrolled through the eligibilities resource.
 
 More details can be found [here](https://stage.developer.mastercard.com/elevate/documentation/use-cases/).    
