@@ -24,11 +24,12 @@ To call these APIs, consumer key and .p12 file are required from your project on
 
 ## Requirements  <a name="requirements"></a>
 
-- Java 11
-- IntelliJ IDEA (or any other IDE)
+- [Mastercard Developers Account](https://developer.mastercard.com/dashboard) with access to "Elevate" API
+- [Java 11](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+- [Apache maven 3.3+](https://maven.apache.org/download.cgi)
+- A text Editor or any IDE
 
 ## Frameworks/Libraries <a name="frameworks"></a>
-- Spring Boot
 - Apache Maven
 - OpenAPI Generator
 
@@ -66,13 +67,12 @@ See also:
 3. Download Sandbox Signing Key, a ```.p12``` file will be downloaded.
 4. In the Client Encryption Keys section of the dashboard, click on the ```Actions``` dropdown and download the client encryption key, a ``.pem``` file will be downloaded. 
 5. Copy the downloaded ```.p12``` and ```.pem``` files to ```src/main/resources``` folder in your code.
-6. Open ```src/main/resources/application.yml``` and configure:
-    - ```mastercard.api.environment.key-file ```- Path to keystore (.p12) file, just change the name as per the downloaded file in step 5. 
-    - ```mastercard.api.authentication.consumer-key``` - Copy the Consumer key from "Sandbox/Production Keys" section on your project page
-    - ```mastercard.api.authentication.keystore-alias``` - Alias of your key. Default key alias for sandbox is ```keyalias```.
-    - ```mastercard.api.authentication.keystore-password``` -  Password of your Keystore. Default keystore password for sandbox project is ```keystorepassword```.
-    - ```mastercard.api.encryption.key-file ```- Path to encryption key (.pem) file, just change the name as per the downloaded file in step 5. 
-    ```mastercard.api.encryption.fingerprint ```- Fingerprint, copy the fingerprint from Client Encryption Keys section. If you have multiple client encryption keys then copy the fingerprint of the key which you want to use.
+6. Open ```src/main/resources/application.properties``` and configure:
+    - ```mastercard.elevate.client.p12.path ```- Path to keystore (.p12) file, just change the name as per the downloaded file in step 5. 
+    - ```mastercard.elevate.client.ref.app.consumer.key``` - Copy the Consumer key from "Sandbox/Production Keys" section on your project page
+    - ```mastercard.elevate.client.ref.app.keystore.alias``` - Alias of your key. Default key alias for sandbox is ```keyalias```.
+    - ```mastercard.elevate.client.ref.app.keystore.password``` -  Password of your Keystore. Default keystore password for sandbox project is ```keystorepassword```.
+    - ```mastercard.elevate.client.ref.app.encryption.file ```- Path to encryption key (.pem) file, just change the name as per the downloaded file in step 5, e.g. ```src/main/resources/<fileName>.pem```.
 
 ## Use-Cases <a name="use-cases"></a>
 1. **Check Eligibility**
@@ -87,18 +87,19 @@ More details can be found [here](https://stage.developer.mastercard.com/elevate/
 
 
 ## Execute the Use-Cases   <a name="execute-the-use-cases"></a>
-1. Run ```mvn clean install``` from the root of the project directory.
-2. There are two ways to execute the use-cases:
-    1. Execute the use-cases(test cases):  
-        - Go to ```src/main/java/com/mastercard/developer/elevate/accelerator/``` folder.  
-        - Execute each test cases.
-    
-    2. Use REST API based Client( such as [Insomnia](https://insomnia.rest/download/core/) or [Postman](https://www.postman.com/downloads/))  
-        - Run ```mvn spring-boot:run``` command to run the application.  
-        - Use any REST API based Client to test the functionality. Below are the APIs exposed by this application:  
-                - POST <Host>/elevate/eligibility
-                - POST <Host>/elevate/redemptions            
-             
+Below are the APIs exposed by this application:  
+       - POST <Host>/elevate/eligibility      
+       - POST <Host>/elevate/redemptions            
+
+Once you have added the correct properties, you are ready to build the application. You can do this by navigating to the project’s base directory from the terminal and then by running the following command.
+
+`mvn clean install`
+
+When the project builds successfully, you can run the following command to start the project  
+- Run ```java -jar target/elevate-accelerator-1.0.0.jar``` command to run the application.  
+- Add argument ```checkEligibility``` or ```redemption``` in above command to execute each api individually: 
+    * For example, run ```java -jar target/elevate-accelerator-1.0.0.jar checkEligibility``` command to execute the ```/eligibility``` api,
+    * Run ```java -jar target/elevate-accelerator-1.0.0.jar redemption``` command to execute the ```/redemption``` api.
                                                                                
 ## Service Documentation <a name="documentation"></a>
 
