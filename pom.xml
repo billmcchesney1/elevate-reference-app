@@ -29,9 +29,12 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.coverage.jacoco.xmlReportPaths>
+            ${project.build.directory}/site/jacoco-merged-test-coverage-report/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
         <sonar.coverage.exclusions>
-            **/ElevateAcceleratorDemoApplication.java
-            **/util/EncryptionConfigUtil.java
+            **/ElevateAcceleratorDemoApplication.java,
+            **/com/mastercard/developers/elevate/accelerator/util/*.java
         </sonar.coverage.exclusions>
         <sonar.projectKey>Mastercard_elevate-reference-app</sonar.projectKey>
         <sonar.organization>mastercard</sonar.organization>
@@ -121,6 +124,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${apache.maven.plugins.version}</version>
                 <configuration>
+                    <argLine>${surefire.jacoco.args} -Xmx1024m -XX:MaxPermSize=512m
+                        -Djdk.net.URLClassPath.disableClassPathURLCheck=true
+                    </argLine>
                     <useSystemClassLoader>true</useSystemClassLoader>
                     <useManifestOnlyJar>false</useManifestOnlyJar>
                     <threadCount>1</threadCount>
@@ -137,6 +143,9 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco-maven-plugin.version}</version>
+                <configuration>
+                <argLine>@{argLine} -Xmx1024m -XX:MaxPermSize=512m</argLine>
+                </configuration>
                 <executions>
                     <execution>
                         <id>before-test-execution</id>
@@ -226,7 +235,7 @@
                                     <excludes>
                                         <exclude>${default.package}.generated.*</exclude>
                                         <exclude>*ElevateAcceleratorDemoApplication</exclude>
-                                        <exclude>*EncryptionConfigUtil</exclude>
+                                        <exclude>com.mastercard.developers.elevate.accelerator.util.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
@@ -248,7 +257,7 @@
                 <version>${openapitools.version}</version>
                 <executions>
                     <execution>
-                        <id>Elevate Accelerator REST Client</id>
+                        <id>Elevate REST Client</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
