@@ -101,6 +101,8 @@ When the project builds successfully, you can run the following command to start
     * For example, run ```java -jar target/elevate-accelerator-1.0.0.jar checkEligibility``` command to execute the ```/eligibility``` api,
     * Run ```java -jar target/elevate-accelerator-1.0.0.jar redemption``` command to execute the ```/redemption``` api.
                                                                                
+**NOTE:** Update request with valid details in json files under location ```/src/main/resources/templates/``` in order to execute these apis successfully.
+
 ## Service Documentation <a name="documentation"></a>
 
 Elevate Accelerator Proxy documentation can be found [here](https://stage.developer.mastercard.com/elevate/documentation/use-cases/).
