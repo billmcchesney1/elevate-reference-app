@@ -54,7 +54,7 @@ class ElevateAcceleratorServiceTest {
 
     @Test
     void testCheckEligibilityServiceError() throws ApiException {
-        String[] args = {CHECK_ELIGIBILITY};
+        String[] args = {};
         when(elevateApi.checkEligibility(any(CheckEligibility.class))).thenThrow(new ApiException());
         elevateAcceleratorService.callElevateServiceApis(args);
         verify(elevateApi).checkEligibility(any(CheckEligibility.class));
@@ -62,9 +62,8 @@ class ElevateAcceleratorServiceTest {
 
     @Test
     void testRedemptionServiceError() throws ApiException {
-        String[] args = {REDEMPTION};
         when(elevateApi.createRedemption(any(Redemptions.class))).thenThrow(new ApiException());
-        elevateAcceleratorService.callElevateServiceApis(args);
+        elevateAcceleratorService.callElevateServiceApis(null);
         verify(elevateApi).createRedemption(any(Redemptions.class));
     }
 

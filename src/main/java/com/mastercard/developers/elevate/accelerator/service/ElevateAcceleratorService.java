@@ -56,7 +56,10 @@ public class ElevateAcceleratorService {
     }
 
     private boolean checkForScenario(String[] args, String scenario) {
-        return (args != null && args.length > 0 && args[0].contains(scenario)) || (args == null || args.length == 0);
+        if(args == null || args.length == 0)
+            return true;
+        else
+            return (args[0].contains(scenario));
     }
 
     private void logScenario(String scenario) {
