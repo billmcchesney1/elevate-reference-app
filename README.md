@@ -101,7 +101,9 @@ When the project builds successfully, you can run the following command to start
     * For example, run ```java -jar target/elevate-accelerator-1.0.0.jar checkEligibility``` command to execute the ```/eligibility``` api,
     * Run ```java -jar target/elevate-accelerator-1.0.0.jar redemption``` command to execute the ```/redemption``` api.
                                                                                
-**NOTE:** Update request with valid details in json files under location ```/src/main/resources/templates/``` in order to execute these apis successfully.
+**NOTE:**   
+    - Update request with valid details in json files under location ```/src/main/resources/templates/``` in order to execute these apis successfully.  
+    - For each new call, you should change the email address,such as, dane+101@ifonly.com or dane+102@ifonly.com. If you use the same email address, you may get an error that the benefit has already been redeemed (this is expected). For each new call, you should change the card number. Use the number generator to generate a number that passes the MOD10/Luhn test. The range of eligible PANs is 5555555555550000 through 5555555555559999.
 
 ## Service Documentation <a name="documentation"></a>
 
