@@ -42,6 +42,7 @@ public class ElevateAcceleratorService {
             logResponse(eligibility);
         }catch (ApiException exception){
             logger.info("Exception occurred while checking eligibility: " + exception.getMessage());
+            logResponse(exception.getResponseBody());
         }
     }
 
@@ -52,6 +53,7 @@ public class ElevateAcceleratorService {
             logResponse(redemptionInfo);
         }catch (ApiException exception){
             logger.info("Exception occurred while redemption: " + exception.getMessage());
+            logResponse(exception.getResponseBody());
         }
     }
 
