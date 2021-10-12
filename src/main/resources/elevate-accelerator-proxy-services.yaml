@@ -2,10 +2,10 @@ openapi: 3.0.3
 info:
   title: Mastercard Elevate Services API
   description: |
-    OpenAPI document for Mastercard Elevate APIs. These APIs can be used to check eligibility for particular offer and redeem the same for a given payment card number. For additional documentation and use cases, see **[Documentation](https://developer.mastercard.com/elevate/documentation/).**
+    Open API document for Mastercard Elevate APIs. These APIs can be used to check eligibility for particular offer and redeem the same for a given payment card number. For additional documentation and use cases, see **[Documentation](https://developer.mastercard.com/elevate/documentation/).**
     <br/>
     ---
-    * **All requests must be signed using oauth 1.0a. Please refer [Access Mastercard APIs](https://developer.mastercard.com/platform/documentation/using-oauth-1a-to-access-mastercard-apis/).**
+    * **All requests must be signed using OAuth 1.0a. Please refer [Access Mastercard APIs](https://developer.mastercard.com/platform/documentation/using-oauth-1a-to-access-mastercard-apis/).**
     ---
     * **The user must provide their card details and email address while checking eligibility or redemption of benefit. These details must be encrypted before entering transit. Please refer to [Mastercard security](https://mstr.cd/2UPfda0).**
     ---
@@ -31,7 +31,7 @@ paths:
       tags:
       - Elevate
       description: |
-         This endpoint checks whether provided payment card is eligible for provided offer or not. If eligible then generate and retrun eligibility id which needs to be provided as an input into `redemptions` endpoint.
+         This endpoint checks whether provided payment card is eligible for provided offer or not. If eligible then generate and return eligibility id which needs to be provided as an input into `redemptions` endpoint.
       operationId: checkEligibility
       x-mastercard-api-encrypted: true
       requestBody:
@@ -52,7 +52,7 @@ paths:
       tags:
       - Elevate
       description: |
-         This endpoint redeem a particular offer for which eligibility has been varified as a part of `eligibilities` API.
+         This endpoint redeem a particular offer for which eligibility has been verified as a part of `eligibilities` API.
       operationId: createRedemption
       x-mastercard-api-encrypted: true
       requestBody:
@@ -115,7 +115,7 @@ components:
       properties:
         Source:
           type: string
-          description: The application name that generated this error. Every error message that is generated and returned by the gateway will have this field equal to Gateway. Other possible values are Doconomy-Proxy and Doconomy.
+          description: The application name that generated this error. Every error message that is generated and returned by the gateway will have this field equal to Gateway. Other possible values are ELEVATE API.
           example: ELEVATE API
         ReasonCode:
           type: string
@@ -148,7 +148,7 @@ components:
       properties:
         partnerId:
           type: integer
-          description: A unique identier asssigned to the issuer.
+          description: A unique identifier assigned to the issuer.
           example: 512
         creditCardNumber:
           type: string
@@ -161,7 +161,7 @@ components:
         productId:
           type: integer
           example: 161041
-          description: Unique identifer of product.
+          description: Unique identifier of product.
         email:
           type: string
           example: john.doe@mail.com
@@ -192,14 +192,14 @@ components:
         data: 
           type: object
           properties:
-            eligibile:
+            eligible:
               type: boolean
               example: true
               description: Denotes whether given payment card is eligible for given offer or not.
             eligibilityId:
               type: string
               example: '1234_5467_50'
-              description: Unique identifer generated in case of card is eligible for particular offer. This id needs to provide as an input to `redemptions` API.
+              description: Unique identifier generated in case of card is eligible for particular offer. This id needs to provide as an input to `redemptions` API.
 
     RedemptionInfo:
       title: RedemptionInfo
@@ -219,7 +219,7 @@ components:
             redemptionId:
               type: string
               example: '10_7890'
-              description: Unique identier generated post successful redemption of an offer.
+              description: Unique identifier generated post successful redemption of an offer.
     Redemptions:
       title: Redemptions
       type: object
@@ -236,7 +236,7 @@ components:
         partnerId:
           type: integer
           example: 512
-          description: A unique identier asssigned to the issuer.
+          description: A unique identifier assigned to the issuer.
         creditCardNumber:
           type: string
           example: 5555555555553107
@@ -244,7 +244,7 @@ components:
         eligibilityId:
           type: string
           example: 17385_161041_1179
-          description: An id recived in the response of `eligibilities` API.
+          description: An id received in the response of `eligibilities` API.
         spendAmount:
           type: number
           example: 109.99
@@ -337,7 +337,7 @@ components:
       value:
         msg: 'OK'
         data:
-          eligibile: 'true'
+          eligible: 'true'
           eligibilityId: '1234_5467_50'
     RedemptionInfo:
       value:
