@@ -20,7 +20,7 @@
 
 ## Overview  <a name="overview"></a>
 This is a reference application to demonstrate how Elevate Accelerator Proxy APIs can be used.
-To call these APIs, consumer key and .p12 file are required from your project on Mastercard Developers.
+To call these APIs, consumer key and .p12 file required from your project on Mastercard Developers.
 
 ## Requirements  <a name="requirements"></a>
 
@@ -40,7 +40,7 @@ Check [Generating and Configuring a Mastercard API Client](https://developer.mas
 
 
 ### Configuring Payload Encryption
-The [Mastercard Encryption Library](https://github.com/Mastercard/client-encryption-java) provides interceptor class that you can use when configuring your API client. This [interceptor](https://github.com/Mastercard/client-encryption-java#usage-of-the-okhttpfieldlevelencryptioninterceptor-openapi-generator-4xy) will encrypt payload before sending the request.
+The [Mastercard Encryption Library](https://github.com/Mastercard/client-encryption-java) provides interceptor class you can use when configuring your API client. This [interceptor](https://github.com/Mastercard/client-encryption-java#usage-of-the-okhttpfieldlevelencryptioninterceptor-openapi-generator-4xy) will encrypt the payload before sending the request.
 
 **Encryption Config**
 ```
@@ -70,20 +70,20 @@ See also:
 6. Open ```src/main/resources/application.properties``` and configure:
     - ```mastercard.elevate.client.p12.path ```- Path to keystore (.p12) file, just change the name as per the downloaded file in step 5. 
     - ```mastercard.elevate.client.ref.app.consumer.key``` - Copy the Consumer key from "Sandbox/Production Keys" section on your project page
-    - ```mastercard.elevate.client.ref.app.keystore.alias``` - Alias of your key. Default key alias for sandbox is ```keyalias```.
+    - ```mastercard.elevate.client.ref.app.keystore.alias``` - Alias of your key. Default key alias for the sandbox is ```keyalias```.
     - ```mastercard.elevate.client.ref.app.keystore.password``` -  Password of your Keystore. Default keystore password for sandbox project is ```keystorepassword```.
     - ```mastercard.elevate.client.ref.app.encryption.file ```- Path to encryption key (.pem) file, just change the name as per the downloaded file in step 5, e.g. ```src/main/resources/<fileName>.pem```.
 
 ## Use-Cases <a name="use-cases"></a>
 1. **Check Eligibility**    
 Endpoint: "/eligibility".
-Used to check eligibility of a credit card in the elevate program for a specific benefit.
+Used to check eligibility of a credit card in elevate program for a specific benefit.
 
 2. **Create Redemptions**    
 Endpoint: "/redemptions".
 Used to create a redemption for a credit card that was previously enrolled through the eligibilities resource.
 
-More details can be found [here](https://stage.developer.mastercard.com/elevate/documentation/use-cases/).    
+More details can be found [here](https://developer.mastercard.com/elevate/documentation/use-cases/).    
 
 
 ## Execute the Use-Cases   <a name="execute-the-use-cases"></a>
@@ -107,14 +107,14 @@ When the project builds successfully, you can run the following command to start
 
 ## Service Documentation <a name="documentation"></a>
 
-Elevate Accelerator Proxy documentation can be found [here](https://stage.developer.mastercard.com/elevate/documentation/use-cases/).
+Elevate Accelerator Proxy documentation can be found [here](https://developer.mastercard.com/elevate/documentation/use-cases/).
 
 
 ## API Reference <a name="api-reference"></a>
-The Swagger API specification can be found [here](https://stage.developer.mastercard.com/elevate/documentation/api-reference/).
+The Swagger API specification can be found [here](https://developer.mastercard.com/elevate/documentation/api-reference/).
 
 ## Support <a name="support"></a>
-Please send an email to **apisupport@mastercard.com** "need to check" with any questions or feedback you may have.
+Please email **apisupport@mastercard.com** with any questions or feedback you may have.
 
 
 ## License <a name="license"></a>
