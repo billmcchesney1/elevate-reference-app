@@ -71,7 +71,7 @@ class ElevateAcceleratorServiceTest {
         Eligibility eligibility = new Eligibility();
         eligibility.setMsg(OK);
         EligibilityData data = new EligibilityData();
-        data.setEligibile(true);
+        data.setEligible(true);
         data.setEligibilityId(ID);
         eligibility.setData(data);
         return eligibility;
