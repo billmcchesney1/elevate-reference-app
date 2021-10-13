@@ -1,92 +1,117 @@
 openapi: 3.0.3
 info:
   title: Mastercard Elevate Services API
-  description: |
-    Open API document for Mastercard Elevate APIs. These APIs can be used to check eligibility for particular offer and redeem the same for a given payment card number. For additional documentation and use cases, see **[Documentation](https://developer.mastercard.com/elevate/documentation/).**
+  description: >
+    Open API document for Mastercard Elevate APIs. These APIs can be used to
+    check eligibility for particular offer and redeem the same for a given
+    payment card number. For additional documentation and use cases, see
+    **[Documentation](https://developer.mastercard.com/elevate/documentation/).**
+
     <br/>
+
     ---
-    * **All requests must be signed using OAuth 1.0a. Please refer [Access Mastercard APIs](https://developer.mastercard.com/platform/documentation/using-oauth-1a-to-access-mastercard-apis/).**
+
+    * **All requests must be signed using OAuth 1.0a. Please refer [Access
+    Mastercard
+    APIs](https://developer.mastercard.com/platform/documentation/using-oauth-1a-to-access-mastercard-apis/).**
+
     ---
-    * **The user must provide their card details and email address while checking eligibility or redemption of benefit. These details must be encrypted before entering transit. Please refer to [Mastercard security](https://mstr.cd/2UPfda0).**
+
+    * **The user must provide their card details and email address while
+    checking eligibility or redemption of benefit. These details must be
+    encrypted before entering transit. Please refer to [Mastercard
+    security](https://mstr.cd/2UPfda0).**
+
     ---
-  termsOfService: "https://developer.mastercard.com/terms-of-use"
+  termsOfService: 'https://developer.mastercard.com/terms-of-use'
   contact:
     name: API Support
-    url: https://developer.mastercard.com/
+    url: 'https://developer.mastercard.com/'
     email: apisupport@mastercard.com
-  version: '1.0.0'
+  version: 1.0.0
 servers:
-- url: https://api.mastercard.com/elevate
-  description: Production Server
-- url: https://sandbox.api.mastercard.com/elevate
-  description: Sandbox Server
+  - url: 'https://api.mastercard.com/elevate'
+    description: Production Server
+  - url: 'https://sandbox.api.mastercard.com/elevate'
+    description: Sandbox Server
 tags:
   - name: Elevate
-    description: APIs to check eligibility for particular offer and redeem the same for a given payment card number.
-    
+    description: >-
+      APIs to check eligibility for particular offer and redeem the same for a
+      given payment card number.
 paths:
   /eligibilities:
     post:
-      summary: Used to check eligibility of a credit card in the elevate program for a specific benefit.
+      summary: >-
+        Used to check eligibility of a credit card in the elevate program for a
+        specific benefit.
       tags:
-      - Elevate
-      description: |
-         This endpoint checks whether provided payment card is eligible for provided offer or not. If eligible then generate and return eligibility id which needs to be provided as an input into `redemptions` endpoint.
+        - Elevate
+      description: >
+        This endpoint checks whether provided payment card is eligible for
+        provided offer or not. If eligible then generate and return eligibility
+        id which needs to be provided as an input into `redemptions` endpoint.
       operationId: checkEligibility
       x-mastercard-api-encrypted: true
       requestBody:
         $ref: '#/components/requestBodies/CheckEligibility'
       responses:
-        "200":
+        '200':
           $ref: '#/components/responses/Eligibility'
-        "400": 
+        '400':
           $ref: '#/components/responses/EligibilitiesBadRequestError'
-        "401": 
+        '401':
           $ref: '#/components/responses/APIAuthorizationError'
-        "404": 
+        '404':
           $ref: '#/components/responses/InvalidAPIError'
-
   /redemptions:
     post:
-      summary: Used to create a redemption for a credit card that was previously enrolled through the eligibilities resource.
+      summary: >-
+        Used to create a redemption for a credit card that was previously
+        enrolled through the eligibilities resource.
       tags:
-      - Elevate
-      description: |
-         This endpoint redeem a particular offer for which eligibility has been verified as a part of `eligibilities` API.
+        - Elevate
+      description: >
+        This endpoint redeem a particular offer for which eligibility has been
+        verified as a part of `eligibilities` API.
       operationId: createRedemption
       x-mastercard-api-encrypted: true
       requestBody:
         $ref: '#/components/requestBodies/Redemptions'
       responses:
-        "200":
+        '200':
           $ref: '#/components/responses/RedemptionInfo'
-        "400":
+        '400':
           $ref: '#/components/responses/RedemptionBadRequestError'
-
 components:
-
   requestBodies:
     CheckEligibility:
-      description: Contains payment card details and offer code for which eligibility needs to be checked. This endpoint uses Mastercard payload encryption. Please refer to the **[Payload Encryption](https://mstr.cd/2UPfda0)** page for implementation details.
+      description: >-
+        Contains payment card details and offer code for which eligibility needs
+        to be checked. This endpoint uses Mastercard payload encryption. Please
+        refer to the **[Payload Encryption](https://mstr.cd/2UPfda0)** page for
+        implementation details.
       required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/CheckEligibility'
-
     Redemptions:
-      description: User's Personal and Card information which needs to be registered onto Priceless Planet Carbon Tracker platform. This endpoint uses Mastercard payload encryption. Please refer to the **[Payload Encryption](https://mstr.cd/2UPfda0)** page for implementation details.
+      description: >-
+        User's Personal and Card information which needs to be registered onto
+        Priceless Planet Carbon Tracker platform. This endpoint uses Mastercard
+        payload encryption. Please refer to the **[Payload
+        Encryption](https://mstr.cd/2UPfda0)** page for implementation details.
       required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Redemptions'
-
   schemas:
     ErrorWrapper:
       title: ErrorWrapper
       type: object
-      description: The error response object which gets returned in case of any error.
+      description: The error response object returned in case of any error.
       required:
         - Errors
       properties:
@@ -97,7 +122,7 @@ components:
       type: object
       description: Error object which returns list of Error objects.
       required:
-      - Error
+        - Error
       properties:
         Error:
           type: array
@@ -115,11 +140,16 @@ components:
       properties:
         Source:
           type: string
-          description: The application name that generated this error. Every error message that is generated and returned by the gateway will have this field equal to Gateway. Other possible values are ELEVATE API.
+          description: >-
+            The application name that generated this error. Every error message
+            that is generated and returned by the gateway will have this field
+            equal to Gateway. Another possible value is ELEVATE API.
           example: ELEVATE API
         ReasonCode:
           type: string
-          description: A unique constant identifying the error case encountered during request processing.
+          description: >-
+            A unique constant identifying the error case encountered during
+            request processing.
           example: 400
         Description:
           type: string
@@ -127,18 +157,24 @@ components:
           example: Missing partnerId.
         Recoverable:
           type: boolean
-          description: Indicates whether this error will always be returned for this request, or retrying could change the outcome.
+          description: >-
+            Indicates whether this error will always be returned for this
+            request, or retrying could change the outcome.
           example: true
         Details:
           type: string
-          description: (Optional) Where appropriate, indicates detailed information about data received and calculated during request processing, to help the user with diagnosing errors.
+          description: >-
+            (Optional) Where appropriate, indicates detailed information about
+            data received and calculated during the request processing, to help
+            the user with diagnosing errors.
           example: Please contact API Support for further details.
-
     CheckEligibility:
       title: CheckEligibility
       type: object
-      description: The object containing payment card data. This object will be encrypted before sending it to server.
-      required: 
+      description: >-
+        The object containing payment card data. This object will be encrypted
+        before sending it to the server.
+      required:
         - partnerId
         - creditCardNumber
         - cardHolderName
@@ -170,56 +206,62 @@ components:
           type: string
           example: ae-amazonprime
           description: Code assigned to an offer for which Eligibility needs to check.
-      example: 
+      example:
         partnerId: 10
         creditCardNumber: '5555555555554444'
-        cardHolderName: 'John Doe'
+        cardHolderName: John Doe
         productId: 5467
-        email: 'john.doe@elevate.mastercard.com'
-        accessCode: 'elevateOffer'
+        email: john.doe@elevate.mastercard.com
+        accessCode: elevateOffer
     Eligibility:
       title: Eligibility
       type: object
-      description: The response object which contains eligibility information for a payment card.
-      required: 
+      description: The response object contains eligibility information for a payment card.
+      required:
         - message
         - data
       properties:
         msg:
           type: string
-          example: "OK"
+          example: OK
           description: Contains response message.
-        data: 
+        data:
           type: object
           properties:
             eligible:
               type: boolean
               example: true
-              description: Denotes whether given payment card is eligible for given offer or not.
+              description: >-
+                Denotes whether given payment card is eligible for given offer
+                or not.
             eligibilityId:
               type: string
               example: '1234_5467_50'
-              description: Unique identifier generated in case of card is eligible for particular offer. This id needs to provide as an input to `redemptions` API.
-
+              description: >-
+                Unique identifier generated in case of card is eligible for
+                particular offer. This id needs to provide as an input to
+                `redemptions` API.
     RedemptionInfo:
       title: RedemptionInfo
       type: object
       description: The response object that contains redemption information.
-      required: 
+      required:
         - msg
         - data
       properties:
         msg:
           type: string
-          example: "OK"
+          example: OK
           description: Contains response message.
-        data: 
+        data:
           type: object
           properties:
             redemptionId:
               type: string
               example: '10_7890'
-              description: Unique identifier generated post successful redemption of an offer.
+              description: >-
+                Unique identifier generated post successful redemption of an
+                offer.
     Redemptions:
       title: Redemptions
       type: object
@@ -243,7 +285,7 @@ components:
           description: 16 digit full creditCardNumber for which Eligibility needs to check.
         eligibilityId:
           type: string
-          example: 17385_161041_1179
+          example: '17385_161041_1179'
           description: An id received in the response of `eligibilities` API.
         spendAmount:
           type: number
@@ -261,39 +303,40 @@ components:
           type: string
           example: USD
           description: currency code of benefit amount.
-      example: 
+      example:
         partnerId: 10
         creditCardNumber: '5555555555554444'
         eligibilityId: '1234_5467_50'
         spendAmount: 109.99
-        spendCurrencyCode: 'USD'
+        spendCurrencyCode: USD
         benefitAmountGiven: 50.99
-        benefitCurrencyCode: 'USD'
-
+        benefitCurrencyCode: USD
   responses:
     Eligibility:
-     description: The response object that contains Eligibility information for a given payment card.
-     content:
-       application/json:
-         schema:
-           $ref: '#/components/schemas/Eligibility'
-         examples:
-           Eligibility:
-             $ref: '#/components/examples/Eligibility'
+      description: >-
+        The response object that contains Eligibility information for a given
+        payment card.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Eligibility'
+          examples:
+            Eligibility:
+              $ref: '#/components/examples/Eligibility'
     RedemptionInfo:
       description: The response object that contains redemption information.
       content:
         application/json:
           schema:
-           $ref: '#/components/schemas/RedemptionInfo'
+            $ref: '#/components/schemas/RedemptionInfo'
           examples:
             RedemptionInfo:
               $ref: '#/components/examples/RedemptionInfo'
-
-    
-
     EligibilitiesBadRequestError:
-      description: This response code is returned when one or more request parameters is either missing or is invalid. A caller should update his request as per error details before trying again.
+      description: >-
+        This response code is returned when one or more request parameters is
+        either missing or is invalid. A caller should update his request as per
+        error details before trying again.
       content:
         application/json:
           schema:
@@ -303,9 +346,11 @@ components:
               $ref: '#/components/examples/MissingPartnerIdError'
             RequestDecryptionError:
               $ref: '#/components/examples/RequestDecryptionError'
-
     RedemptionBadRequestError:
-      description: This response code is returned when one or more request parameters is either missing or is invalid. A caller should update his request as per error details before trying again.
+      description: >-
+        This response code is returned when one or more request parameters is
+        either missing or is invalid. A caller should update his request as per
+        error details before trying again.
       content:
         application/json:
           schema:
@@ -313,7 +358,6 @@ components:
           examples:
             RequestDecryptionError:
               $ref: '#/components/examples/RequestDecryptionError'
-
     APIAuthorizationError:
       description: This response code is returned when a API authorization fails.
       content:
@@ -324,7 +368,9 @@ components:
             APIAuthorizationError:
               $ref: '#/components/examples/APIAuthorizationError'
     InvalidAPIError:
-      description: This response code is returned when the request URI doesn't match an existing API resource.
+      description: >-
+        This response code is returned when the request URI doesn't match an
+        existing API resource.
       content:
         application/json:
           schema:
@@ -335,50 +381,51 @@ components:
   examples:
     Eligibility:
       value:
-        msg: 'OK'
+        msg: OK
         data:
           eligible: 'true'
           eligibilityId: '1234_5467_50'
     RedemptionInfo:
       value:
-        msg: 'OK'
+        msg: OK
         data:
           redemptionId: '10_7890'
-
-
-    MissingPartnerIdError: 
-      value: 
+    MissingPartnerIdError:
+      value:
         Errors:
           Error:
-            - Source: 'Elevate API'
+            - Source: Elevate API
               ReasonCode: '402'
-              Description: 'Missing partnerId.'
+              Description: Missing partnerId.
               Recoverable: false
               Details: ''
     RequestDecryptionError:
-      value: 
+      value:
         Errors:
           Error:
-            - Source: 'Elevate Accelerator'
+            - Source: Elevate Accelerator
               ReasonCode: '1001'
-              Description: 'We are unable to decipher your request, kindly verify your request before trying again. If the problem persist then reach out to your Mastercard associate.'
+              Description: >-
+                We are unable to decipher your request, kindly verify your
+                request before trying again. If the problem persists then reach
+                out to your Mastercard associate.
               Recoverable: true
               Details: ''
-    APIAuthorizationError: 
-      value: 
+    APIAuthorizationError:
+      value:
         Errors:
           Error:
-            - Source: 'Elevate API'
+            - Source: Elevate API
               ReasonCode: '455'
-              Description: 'API Unauthorized'
+              Description: API Unauthorized
               Recoverable: true
               Details: ''
-    InvalidAPIError: 
-      value: 
+    InvalidAPIError:
+      value:
         Errors:
           Error:
-            - Source: 'Elevate API'
+            - Source: Elevate API
               ReasonCode: '453'
-              Description: 'Request URI does not match an existing API resource.'
+              Description: Request URI does not match an existing API resource.
               Recoverable: true
               Details: ''
