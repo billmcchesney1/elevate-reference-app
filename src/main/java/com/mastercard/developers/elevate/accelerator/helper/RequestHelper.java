@@ -21,6 +21,7 @@ import com.mastercard.developer.interceptors.OkHttpOAuth1Interceptor;
 import com.mastercard.developers.elevate.accelerator.generated.invokers.ApiClient;
 import com.mastercard.developers.elevate.accelerator.generated.models.CheckEligibility;
 import com.mastercard.developers.elevate.accelerator.generated.models.Redemptions;
+import com.mastercard.developers.elevate.accelerator.service.ElevateAcceleratorService;
 import okhttp3.OkHttpClient;
 import org.apache.commons.io.IOUtils;
 
@@ -30,6 +31,7 @@ import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import static com.mastercard.developers.elevate.accelerator.util.EncryptionConfigUtil.getEncryptionConfig;
 
@@ -48,6 +50,8 @@ public final class RequestHelper {
 
     private static Properties prop = null;
     private static String propertyFile = "application.properties";
+
+    private static final Logger logger = Logger.getLogger(RequestHelper.class.getName());
 
     private RequestHelper(){}
 
@@ -87,7 +91,7 @@ public final class RequestHelper {
                         getEncryptionConfig(prop))).addInterceptor(
                 new OkHttpOAuth1Interceptor(prop.getProperty(CONSUMER_KEY), getPrivateKey()))
                 .build();
-
+        logger.info("Calling API: " + prop.getProperty(BASE_URL));
         return new ApiClient().setHttpClient(client).setBasePath(prop.getProperty(BASE_URL));
     }
 
