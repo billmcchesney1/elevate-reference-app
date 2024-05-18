@@ -15,7 +15,7 @@
         <default.package>com.mastercard.developers.elevate.accelerator</default.package>
         <swagger-core-version>1.6.2</swagger-core-version>
         <gson-fire-version>1.8.5</gson-fire-version>
-        <client-encryption-version>1.5.0</client-encryption-version>
+        <client-encryption-version>1.8.1</client-encryption-version>
         <oauth1-signer-version>1.5.0</oauth1-signer-version>
         <okhttp-version>4.9.1</okhttp-version>
         <lmax.disruptor.version>3.4.2</lmax.disruptor.version>
